@@ -1,7 +1,7 @@
 module.exports = class WelcomeController extends Controller.Base
   
   index : -> 
-    @req.title = 'Welcome'
+    @data.title = 'Welcome'
     do @render
 
 

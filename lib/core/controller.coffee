@@ -1,11 +1,15 @@
 GLOBAL.Controller =
 
   Base : class
-    constructor : (@req, @res, @view)->
+    constructor : (@request, @response, @view, @content_type)->
+      @data = {}
 
     render : ->
-      @res.render @view, @req    
+      if @content_type is 'json'
+        @response.contentType 'application/json'
+        @response.send JSON.stringify @data
+      else
+        @response.render @view, @data
 
     redirect : (destination)->
-      @res.redirect destination
-
+      @response.redirect destination
