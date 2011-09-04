@@ -1,0 +1,2 @@
+<h1><%= @title %></h1>
+<p>This little guy is built on top of <a href="http://expressjs.com">Express</a></p>

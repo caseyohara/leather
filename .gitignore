@@ -1,0 +1,5 @@
+.DS_Store
+Thumbs.db
+.Trashes
+
+node_modules
