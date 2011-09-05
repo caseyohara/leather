@@ -39,36 +39,30 @@ app.configure 'production', ->
 # Example route definition:
 # '/posts'            : ['posts', 'index']
 # '/posts/new'        : ['posts', 'new']
-# '/posts/create'     : ['posts', 'create', [], 'post']
+# '/posts/create'     : ['posts', 'create', 'post']
 # '/posts/:id'        : ['posts', 'show']
 
 # Anatomy of a route:
-# {route url}        : [{controller}, {action}, {content types}, {http method}]
-
-# content types is an array of file extensions to respond to. ex: ['html','json','xml']
-# if omitted or left empty, will default to html
+# {route url}        : [{controller}, {action}, {http method}]
 
 
+response_formats = config.response_formats or ['html','json']
 
 # Loop over routes, applying each route to the application router
 # load up the controller it is calling and invoke the route's action 
-for route, [controller, action, content_types, method] of routes
-  do (route, [controller, action, content_types, method])->
-    
-    # supply the route with html by default
-    if not content_types? or not content_types.length
-      content_types = ['html']
+for route, [controller, action, method] of routes
+  do (route, [controller, action, method])->
 
     # route '/' as an alternative to html
-    if 'html' in content_types and '/' not in content_types
-      content_types.push '/' 
+    if '/' not in response_formats
+      response_formats.push '/' 
       
-    # loop over each content type and create a route for it
-    for content_type in content_types
-      do (route, controller, action, content_type, method)->
+    # loop over each response format and create a route for it
+    for response_format in response_formats
+      do (response_format, route, controller, action, method)->
         
-        # if the content type extension isn't '/' then apply the extension to the route
-        route = route + '.' + content_type if content_type isnt '/'
+        # if the response format extension isn't '/' then apply the extension to the route
+        route = route + '.' + response_format if response_format isnt '/'
         
         # determine view by controller#action convention
         view = controller + '/' + action
@@ -81,8 +75,8 @@ for route, [controller, action, content_types, method] of routes
 
           # create an instance of the controller
           # pass it the request and response objects
-          # as well as the view and content type of the route
-          _controller =  new _controller req, res, view, content_type
+          # as well as the view and response format of the route
+          _controller =  new _controller req, res, view, response_format
 
           # call the route's action
           do _controller[action]
