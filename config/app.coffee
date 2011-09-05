@@ -1,6 +1,7 @@
-BASEDIR = __dirname + '/../'
-APPDIR  = BASEDIR + 'app/'
-LIBDIR  = BASEDIR + 'lib/'
+GLOBAL = global ? window
+GLOBAL.BASEDIR = __dirname + '/../'
+GLOBAL.APPDIR  = BASEDIR + 'app/'
+GLOBAL.LIBDIR  = BASEDIR + 'lib/'
 
 express = require 'express'
 config  = require BASEDIR + 'config/config'
@@ -85,6 +86,7 @@ for route, [controller, action, content_types, method] of routes
 
           # call the route's action
           do _controller[action]
+          do _controller.render
 
 
 
