@@ -2,7 +2,6 @@ BASEDIR = __dirname + '/../'
 APPDIR  = BASEDIR + 'app/'
 LIBDIR  = BASEDIR + 'lib/'
 
-fs      = require 'fs'
 express = require 'express'
 config  = require BASEDIR + 'config/config'
 routes  = require BASEDIR + 'config/routes'
