@@ -1,4 +1,5 @@
 config = 
+  response_formats : ['html','json']
   view_engine : 'eco'
   port : 3000
   db : 

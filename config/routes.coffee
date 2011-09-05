@@ -1,6 +1,6 @@
 routes =
   '/'        : ['welcome', 'index']
-  '/welcome' : ['welcome', 'index', ['html','json']]
+  '/welcome' : ['welcome', 'index']
 
 
 module.exports = routes

@@ -1,11 +1,11 @@
 GLOBAL.Controller =
 
   Base : class
-    constructor : (@request, @response, @view, @content_type)->
+    constructor : (@request, @response, @view, @response_format)->
       @data = {}
 
     render : ->
-      if @content_type is 'json'
+      if @response_format is 'json'
         @response.contentType 'application/json'
         @response.send JSON.stringify @data
       else
