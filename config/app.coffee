@@ -80,7 +80,7 @@ for route, [controller, action, method] of routes
 
           # call the route's action
           do _controller[action]
-          do _controller.render
+          do _controller.render unless _controller.auto_render is false
 
 
 
