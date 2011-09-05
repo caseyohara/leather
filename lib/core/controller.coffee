@@ -2,7 +2,9 @@ GLOBAL.Controller =
 
   Base : class
     constructor : (@request, @response, @view, @response_format)->
+      @auto_render = true
       @data = {}
+
 
     render : ->
       if @response_format is 'json'
